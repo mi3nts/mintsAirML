@@ -1,0 +1,112 @@
+clc
+close all
+clear all 
+
+% Data Pre Processing for Pre Car Calibration 
+% Defining Node IDs
+
+display("--------MINTS--------")
+addpath("../../functions/");
+
+% Loading Mints Data 
+rawMatsFolder = "/media/teamlary/Team_Lary_2/air930/mintsData/rawMats/";
+% Constructing the input and output data for ML 
+
+mergedMatsFolder     = "/media/teamlary/Team_Lary_2/air930/mintsData/mergedMats/";
+
+trainingMatsFolder   = "/media/teamlary/Team_Lary_2/air930/mintsData/trainingMats";
+
+modelsFolder         = "/media/teamlary/Team_Lary_2/air930/mintsData/modelsMats";
+
+nodeIDs   = {...
+%                 '001e06305a12',...
+                '001e06323a12',...
+                '001e06318cd1',...
+                '001e06305a61',...
+                '001e06323a05',...
+                '001e06305a57',...
+                '001e063059c2',...
+                '001e06318c28',...
+                '001e06305a6b',...
+                '001e063239e3',...
+                '001e06305a6c'...
+                };
+            
+mintsTargets =   {...
+            'pm1_PALAS'                   ,...
+            'pm2_5_palas'                 ,...
+            'pm4_palas'                   ,...
+            'pm10_palas'                  ,...
+            'pmTotal_palas'               ,...
+            'dCn_palas'                    };
+
+            
+for nodeIndex = 1:length(nodeIDs)
+    nodeID = nodeIDs{nodeIndex};
+    
+    for targetIndex = 1: length(mintsTargets)              
+    
+    target = mintsTargets{targetIndex};
+    
+    loadName = getMintsFileNameTraining(trainingMatsFolder,nodeIDs,nodeIndex,...
+                                                                    target,"trainingMintsAir");
+    display("Loading " + loadName);
+    
+    load(loadName);
+    
+    display(" ")
+    
+    Mdl = fitrensemble(trainingT,target,...
+                    'OptimizeHyperparameters','all',...
+                    'HyperparameterOptimizationOptions',...
+                        struct(...
+                        'AcquisitionFunctionName','expected-improvement-plus',...
+                        'UseParallel',true ...
+                        )...
+                    );
+   
+
+    outTrainEstimate=predict(Mdl,trainingT);
+    outValidation_stimate=predict(Mdl,In_Validation);
+
+    mse_Train=sum((outTrainEstimate-Out_Train).^2)/length(Out_Train)
+    mse_Validation=sum((Out_Validation_estimate-Out_Validation).^2)/length(Out_Validation)
+
+    R_Train = corrcoef(outTrainEstimate,Out_Train);
+    r_Train=R_Train(1,2);
+    R_Validation = corrcoef(Out_Validation_estimate,Out_Validation);
+    r_Validation=R_Validation(1,2);  
+
+            %--------------------------------------------------------------------------
+    % Estimate the predictor importance
+    imp=predictorImportance(Mdl)
+    [sorted_imp,isorted_imp] = sort(imp,'descend');    
+
+    
+    
+%     %--------------------------------------------------------------------------
+%     figure
+%     plot(Out,Out,'-b','LineWidth',2)
+%     hold on
+%     scatter(Out_Train,Out_Train_estimate,50,'og','filled')
+%        scatter(Out_Validation,Out_Validation_estimate,15,'+r')
+%             xl=xlim;
+%             xlim([0 xl(2)])
+%             ylim([0 xl(2)])
+%             grid on
+%             hold off
+%             xlabel(['True ' WantedVariablesNames{ivar}]);ylabel(['Estimated ' WantedVariablesNames{ivar}]);title([WantedVariablesNames{ivar}])
+%             legend(...
+%                 '1:1',...
+%                 strcat('Training (# ',separatethousands(n_Train,',',0),', R=',num2str(r_Train,3), ')'),...
+%                 strcat('Validation (# ',separatethousands(n_Validation,',',0),', R=',num2str(r_Validation,3),')'),...
+%                 'Location','northwest' ...
+%                 )
+%             set(gca,'FontSize',16); set(gca,'TickDir','out'); set(gca,'LineWidth',2);
+%             print('-dpng',fn_scatter);% save to a png file
+                
+                
+                
+    
+    end %Targets 
+end % Nodes 
