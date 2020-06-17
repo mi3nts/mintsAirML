@@ -80,9 +80,7 @@ for nodeIndex = 1:length(nodeIDs)
             Mdl = fitrgp(trainingT,target,...
                 'KernelFunction','squaredexponential',...
                 'OptimizeHyperparameters','auto','HyperparameterOptimizationOptions',...
-                struct('AcquisitionFunctionName','expected-improvement-plus',...
-                 'UseParallel',true ...
-                 ));
+                struct('AcquisitionFunctionName','expected-improvement-plus'));
 
 
         else
@@ -96,7 +94,7 @@ for nodeIndex = 1:length(nodeIDs)
                             );
         end
         
-        display("Training Time: " + toc  + " Sec")
+        display(""toc
         
         saveName = getMintsFileNameGeneral(modelsMatsFolder,nodeIDs,nodeIndex,...
                                                     target,versionStr)
