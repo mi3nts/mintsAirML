@@ -13,7 +13,7 @@ nodeIDs   =  {'001e0610c2e9',...
              };
  
 startDate  = datetime(2019,01,01) ;
-endDate    = datetime(2020,05,01) ;
+endDate    = datetime(2020,08,01) ;
 period     = startDate:endDate;
 
 dataFolder          = "/media/teamlary/Team_Lary_2/carMints";
@@ -25,7 +25,7 @@ stringIn = "mintsDailyRetimed" +  string(timeStep);
 
 fileNameIndex = 1;
 
-for nodeIndex = 1: 1 %length(nodeIDs)
+for nodeIndex = 1: length(nodeIDs)
 
     mintsDailyCell   = cell(1,length(period));
     mintsDailyWidths = zeros(1,length(period));
@@ -50,7 +50,7 @@ for nodeIndex = 1: 1 %length(nodeIDs)
     %% Getting Eval String 
     evalString = " mintsDataAll = ["  
     for dateIndex = 1:length(period)
-        if (max(mintsDailyWidths)==mintsDailyWidths(dateIndex))
+        if (20 ==mintsDailyWidths(dateIndex))
             evalString = strcat(evalString,"S{",string(dateIndex),"};");
         end
     end % Dates   

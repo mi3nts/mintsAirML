@@ -26,7 +26,7 @@ for fileIndex = 1: length(palasFiles)
     
 end
 
-save("palasSet1.mat",'palasAirAll','palasWeatherAll')
+save("palasSetJuly2020.mat",'palasAirAll','palasWeatherAll')
 
 
 % for fileIndex = 1: length(palasFiles)

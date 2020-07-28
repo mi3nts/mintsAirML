@@ -9,7 +9,7 @@ nodeIDs   = {'001e0610c2e9',...
              };
  
 startDate  = datetime(2019,01,01) ;
-endDate    = datetime(2020,05,01) ;
+endDate    = datetime(2020,08,01) ;
 
 period     = startDate:endDate;
 

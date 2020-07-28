@@ -100,10 +100,4 @@ for nodeIndex = 1: length(nodeIDs)
     
     evalString = strcat(evalString,"];");
     display(evalString);
-    eval(evalString);
-    save(fileNameForAll,'mintsDataAll');
-    
-end % Node ID
-
-
-
+    eval(evalString);\  

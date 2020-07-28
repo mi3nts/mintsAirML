@@ -18,7 +18,7 @@ endDate    = datetime(2020,25,31) ;
 
 period     = startDate:endDate;
 
-dataFolder       = "/media/teamlary/Team_Lary_2/air930/mintsData";
+dataFolder       = "/media/teamlary/Team_Lary_2/carMints";
 rawFolder        = dataFolder + "/raw";
 rawDotMatsFolder = dataFolder + "/rawMats";
 stringIn = "mintsDaily";
