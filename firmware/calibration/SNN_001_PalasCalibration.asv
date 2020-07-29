@@ -10,23 +10,19 @@ addpath("../../functions/");
 
 % Loading Mints Data 
 
+
+
+
 mintsDataFolder         = "/media/teamlary/Team_Lary_2/air930/mintsData/";
 
 [ref,pcUser] = system('hostname');
-
-if(strtrim(string(pcUser)) == "TeamLary1")
+if(pcUser == 'teamlary1')
     mintsDataFolder         = "/media/teamlary/Team_Lary_2/air930/mintsData/";
-    poolobj = parpool(12)
-    
-elseif(strtrim(string(pcUser)) == "lhw150030")
-    mintsDataFolder         = "/media/teamlary/Team_Lary_2/air930/mintsData/";
-    poolobj = parpool(50)
-   
+elseif(pcUser == 'lhw150030')
+    mintsDataFolder         = "/media/teamlary/Team_Lary_2/air930/mintsData/";    
 else 
     mintsDataFolder         = "/media/teamlary/Team_Lary_2/air930/mintsData/";
 end
-
-
 
 rawMatsFolder            = mintsDataFolder + "rawMats/";
 
@@ -143,7 +139,3 @@ for nodeIndex = 1:length(nodeIDs)
     clear nodeID
     
 end % Nodes 
-
-
-%% Delete Pool 
-delete(poolobj)
