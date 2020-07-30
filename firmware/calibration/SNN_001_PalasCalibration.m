@@ -18,7 +18,7 @@ if(strtrim(string(pcUser)) == "TeamLary1")
     mintsDataFolder         = "/media/teamlary/Team_Lary_2/air930/mintsData/";
     poolobj = parpool(12)
     
-elseif(strtrim(string(pcUser)) == "lhw150030")
+elseif(strtrim(string(pcUser)) == "air930")
     mintsDataFolder         = "/media/teamlary/Team_Lary_2/air930/mintsData/";
     poolobj = parpool(50)
    
