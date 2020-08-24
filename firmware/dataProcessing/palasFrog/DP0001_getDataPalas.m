@@ -6,11 +6,11 @@ close all
 
 display("--------MINTS--------")
 
-nodeIDs   = {'001e063059c2'};
+addpath('../../functions')
  
 dataFolder       = "/media/teamlary/Team_Lary_2/air930/mintsData";
 referenceFolder  = dataFolder + "/reference";
-palasFolder      = referenceFolder + "/palas/mintsData";
+palasFolder      = referenceFolder + "/palas";
 
 palasFiles       = dir(palasFolder+"/*.txt")
 
@@ -26,7 +26,7 @@ for fileIndex = 1: length(palasFiles)
     
 end
 
-save("palasSetJuly2020.mat",'palasAirAll','palasWeatherAll')
+save("palasSetAug_22_2020.mat",'palasAirAll','palasWeatherAll')
 
 
 % for fileIndex = 1: length(palasFiles)

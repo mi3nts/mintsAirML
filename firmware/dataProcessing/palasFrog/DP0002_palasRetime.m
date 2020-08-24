@@ -27,12 +27,12 @@ close all
 % end
 % 
 % save("palasSet1.mat",'palasAirAll','palasWeatherAll')
-
+load('/media/teamlary/Team_Lary_2/air930/mintsData/referenceMats/palas/palasSetAug_22_2020.mat')
 
 palasAirAllRetimed     = retime(table2timetable(unique(palasAirAll)),'regular',@mean,'TimeStep',seconds(30));
 palasWeatherAllRetimed = retime(table2timetable(unique(palasWeatherAll)),'regular',@mean,'TimeStep',seconds(30));
 
-save("palasSetJuly2020Retimed.mat",'palasAirAllRetimed','palasWeatherAllRetimed')
+save('/media/teamlary/Team_Lary_2/air930/mintsData/referenceMats/palas/palasSetAug_22_2020_Retimed.mat','palasAirAllRetimed','palasWeatherAllRetimed')
 
 
 % for fileIndex = 1: length(palasFiles)
